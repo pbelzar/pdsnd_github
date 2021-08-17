@@ -12,7 +12,9 @@ Allows the user to analyse certain city's bikeshare information and provides usa
 ### Files used
 bikeshare.py (Python Source Code)
 /data subfolder with relevant data per city
+README.md
 
 ### Credits
 Udacity for the informative training material and course offered.
 Richard for helpful explanations particularly on Version Control and GitHub lessons.
+Finally, thanks to my line manager who encouraged me to take this course.
