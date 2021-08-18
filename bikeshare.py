@@ -165,16 +165,12 @@ def trip_duration_stats(df):
     try:
         # TO DO: display total travel time
         # Sum time in seconds
-        trip_duration = df['Trip Duration'].sum()
         # Convert to days/hours/minutes/seconds
-        conversion = de.timedelta(seconds=int(trip_duration))
-        print('Total Travel Time (days, hh:mi:ss):', str(conversion))
+        print('Total Travel Time (days, hh:mi:ss):', str(de.timedelta(seconds=int(df['Trip Duration'].sum()))))
 
         # TO DO: display mean travel time
         # Average the time per trip, in seconds
-        trip_duration = df['Trip Duration'].mean()
-        # Convert to days/hours/minutes/seconds
-        conversion = de.timedelta(seconds=int(trip_duration))
+        conversion = de.timedelta(seconds=int(df['Trip Duration'].mean()))
         print('Average Travel Time per Trip (hh:mi:ss):', str(conversion))
 
         print("\nThis took %s seconds." % (time.time() - start_time))
