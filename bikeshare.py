@@ -17,34 +17,37 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bike share data!')
-    
+
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    city = input("Please enter city as Chicago, New York City or Washington: ").lower()
+    msg = "Please enter city as Chicago, New York City or Washington: "
+    city = input(msg).lower()
     correct_cities = ['chicago','new york city','washington']
-    
+
     while city not in correct_cities:
-        print("Incorrect value entered. Please enter a correct city:")    
-        city = input("Please enter city as Chicago, New York City or Washington: ").lower()
-    
+        print("Incorrect value entered. Please enter a correct city:")
+        city = input(msg).lower()
+
     # TO DO: get user input for month (all, january, february, ... , june)
-    month = input("Please enter month between January and June otherwise state 'all': ").title()
+    msg = "Please enter month between January and June otherwise state 'all': "
+    month = input(msg).title()
     correct_months = ['All','January','February','March','April','May','June']
-    
+
     while month not in correct_months:
-        print("Incorrect value entered. Please enter a correct month, otherwise state 'all':")    
-        month = input("Please enter month between January and June otherwise state 'all': ").title()
-    
+        print("Incorrect value entered. Please enter a correct month, otherwise state 'all':")
+        month = input(msg).title()
+
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-    day = input("Please enter day of week between Monday and Sunday, otherwise enter 'all': ").title()
+    msg = "Please enter day of week between Monday and Sunday, otherwise enter 'all': "
+    day = input(msg).title()
     correct_days = ['All','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
-    
+
     while day not in correct_days:
-        print("Incorrect value entered. Please enter a correct week day, otherwise enter 'all':")    
-        day = input("Please enter day of week between monday and sunday, otherwise enter 'all': ").title()
-        
+        print("Incorrect value entered. Please enter a correct week day, otherwise enter 'all':")
+        day = input(msg).title()
+
     print('-'*40)
     return city, month, day
-    
+
 def load_data(city, month, day):
     """
     Loads data for the specified city and filters by month and day if applicable.
@@ -94,9 +97,9 @@ def raw_data(df):
         #Print specified itteration of x5 records
         print(df.head(n))
         raw_display = input("\nWould you like to show the next five records of the file? Type 'yes' to do so.\n").lower()
-        
+
     input("Displaying statistics on the dataset filtered, press Enter to continue...\n")
-      
+
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
@@ -125,7 +128,7 @@ def time_stats(df):
         print("\nThis took %s seconds." % (time.time() - start_time))
         print('-'*40)
     except KeyError:
-        print("Warning (Time Stats): Some columns for analysis do not exist in this dataset!\n")  
+        print("Warning (Time Stats): Some columns for analysis do not exist in this dataset!\n")
 
 
 def station_stats(df):
@@ -136,22 +139,22 @@ def station_stats(df):
 
     try:
         # TO DO: display most commonly used start station
-        common_start_station = df['Start Station'].value_counts().nlargest(1).index[0] 
+        common_start_station = df['Start Station'].value_counts().nlargest(1).index[0]
         print('Most Commonly Used Start Station:', common_start_station)
 
         # TO DO: display most commonly used end station
-        common_end_station = df['End Station'].value_counts().nlargest(1).index[0] 
+        common_end_station = df['End Station'].value_counts().nlargest(1).index[0]
         print('Most Commonly Used End Station:', common_end_station)
 
         # TO DO: display most frequent combination of start station and end station trip
         df['Start End Trip'] = df['Start Station'] + ' >> ' + df['End Station']
-        common_station_trip = df['Start End Trip'].value_counts().nlargest(1).index[0] 
+        common_station_trip = df['Start End Trip'].value_counts().nlargest(1).index[0]
         print('Most Commonly Used Start >> End Station Trip:', common_station_trip)
 
         print("\nThis took %s seconds." % (time.time() - start_time))
         print('-'*40)
     except KeyError:
-        print("Warning (Station Stats): Some columns for analysis do not exist in this dataset!\n")  
+        print("Warning (Station Stats): Some columns for analysis do not exist in this dataset!\n")
 
 
 def trip_duration_stats(df):
@@ -164,7 +167,7 @@ def trip_duration_stats(df):
         # Sum time in seconds
         trip_duration = df['Trip Duration'].sum()
         # Convert to days/hours/minutes/seconds
-        conversion = de.timedelta(seconds=int(trip_duration)) 
+        conversion = de.timedelta(seconds=int(trip_duration))
         print('Total Travel Time (days, hh:mi:ss):', str(conversion))
 
         # TO DO: display mean travel time
@@ -177,7 +180,7 @@ def trip_duration_stats(df):
         print("\nThis took %s seconds." % (time.time() - start_time))
         print('-'*40)
     except KeyError:
-        print("Warning (Trip Duration Stats): Some columns for analysis do not exist in this dataset!\n")    
+        print("Warning (Trip Duration Stats): Some columns for analysis do not exist in this dataset!\n")
 
 
 def user_stats(df):
@@ -217,7 +220,7 @@ def main():
 
         #display raw data
         raw_data(df)
-        
+
         #display statistics
         time_stats(df)
         station_stats(df)
