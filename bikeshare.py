@@ -19,28 +19,31 @@ def get_filters():
     print('Hello! Let\'s explore some US bike share data!')
 
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    city = input("Please enter city as Chicago, New York City or Washington: ").lower()
+    msg = "Please enter city as Chicago, New York City or Washington: "
+    city = input(msg).lower()
     correct_cities = ['chicago','new york city','washington']
 
     while city not in correct_cities:
         print("Incorrect value entered. Please enter a correct city:")
-        city = input("Please enter city as Chicago, New York City or Washington: ").lower()
+        city = input(msg).lower()
 
     # TO DO: get user input for month (all, january, february, ... , june)
-    month = input("Please enter month between January and June otherwise state 'all': ").title()
+    msg = "Please enter month between January and June otherwise state 'all': "
+    month = input(msg).title()
     correct_months = ['All','January','February','March','April','May','June']
 
     while month not in correct_months:
         print("Incorrect value entered. Please enter a correct month, otherwise state 'all':")
-        month = input("Please enter month between January and June otherwise state 'all': ").title()
+        month = input(msg).title()
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-    day = input("Please enter day of week between Monday and Sunday, otherwise enter 'all': ").title()
+    msg = "Please enter day of week between Monday and Sunday, otherwise enter 'all': "
+    day = input(msg).title()
     correct_days = ['All','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
 
     while day not in correct_days:
         print("Incorrect value entered. Please enter a correct week day, otherwise enter 'all':")
-        day = input("Please enter day of week between monday and sunday, otherwise enter 'all': ").title()
+        day = input(msg).title()
 
     print('-'*40)
     return city, month, day
@@ -163,16 +166,12 @@ def trip_duration_stats(df):
     try:
         # TO DO: display total travel time
         # Sum time in seconds
-        trip_duration = df['Trip Duration'].sum()
         # Convert to days/hours/minutes/seconds
-        conversion = de.timedelta(seconds=int(trip_duration))
-        print('Total Travel Time (days, hh:mi:ss):', str(conversion))
+        print('Total Travel Time (days, hh:mi:ss):', str(de.timedelta(seconds=int(df['Trip Duration'].sum()))))
 
         # TO DO: display mean travel time
         # Average the time per trip, in seconds
-        trip_duration = df['Trip Duration'].mean()
-        # Convert to days/hours/minutes/seconds
-        conversion = de.timedelta(seconds=int(trip_duration))
+        conversion = de.timedelta(seconds=int(df['Trip Duration'].mean()))
         print('Average Travel Time per Trip (hh:mi:ss):', str(conversion))
 
         print("\nThis took %s seconds." % (time.time() - start_time))
@@ -198,12 +197,9 @@ def user_stats(df):
         print('\n')
 
         # TO DO: Display earliest, most recent, and most common year of birth
-        min_year = int(df['Birth Year'].min())
-        max_year = int(df['Birth Year'].max())
-        common_year = int(df['Birth Year'].mode()[0])
-        print ("Earliest Birth Year:",min_year)
-        print ("Most Recent Birth Year:",max_year)
-        print ("Most Common Birth Year:",common_year)
+        print ("Earliest Birth Year:",int(df['Birth Year'].min()))
+        print ("Most Recent Birth Year:",int(df['Birth Year'].max()))
+        print ("Most Common Birth Year:",int(df['Birth Year'].mode()[0]))
 
         print("\nThis took %s seconds." % (time.time() - start_time))
         print('-'*40)
